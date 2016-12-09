@@ -300,6 +300,11 @@ public class DefaultExecution implements Execution {
       );
     }
   }
+  
+  @Override
+  public ExecStarter forkChild() throws UnmanagedThreadException {
+    return Execution.fork().baseRegistry(registry.asImmutable());
+  }
 
   @Override
   public <T> void remove(TypeToken<T> type) throws NotInRegistryException {
@@ -307,8 +312,8 @@ public class DefaultExecution implements Execution {
   }
 
   @Override
-  public Registry immutable() {
-    return registry.immutable();
+  public Registry asImmutable() {
+    return registry.asImmutable();
   }
 
   @Override
